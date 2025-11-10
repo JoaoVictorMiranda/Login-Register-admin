@@ -1,0 +1,36 @@
+import jwt from 'jsonwebtoken'
+
+const KEY = 'loginRobson'
+
+export function generateToken(userInfo) {
+    return jwt.sign(userInfo, KEY)
+}
+
+export function getAuthentication(checkRole, throw401 = true) {
+    return (req, resp, next) => {
+        try {
+            let token = req.headers['x-access-token'];
+
+            if (token === undefined)
+                token = req.query['x-access-token'];
+
+            let signd = jwt.verify(token, KEY);
+
+            req.user = signd;
+
+            if (checkRole && !checkRole(signd) && signd.tipo !== 'admin')
+                return resp.status(403).end();
+            next();
+        }
+        catch {
+            if (throw401) {
+                let error = new Error();
+                error.stack = 'Authentication Error: JWT must be provided';
+                resp.status(401).end();
+            }
+            else {
+                next();
+            }
+        }
+    }
+}
