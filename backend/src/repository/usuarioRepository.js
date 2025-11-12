@@ -5,9 +5,9 @@ const tileCount = 12;
 
 export async function criarUsuario(dados) {
     const comando = `
-        INSERT INTO usuarios(nome, email, senha, nascimento, criado_em)
+        INSERT INTO usuarios(nome, email, senha, criado_em)
         VALUES
-        (?,?,?,?, NOW());
+        (?,?,?, NOW());
     `;
 
     try {
@@ -16,8 +16,7 @@ export async function criarUsuario(dados) {
         const [registro] = await connection.query(comando, [
             dados.nome,
             dados.email,
-            hash,
-            dados.nascimento
+            hash
         ]);
 
         return registro.insertId; // retorna o ID do novo usuário
@@ -30,7 +29,7 @@ export async function criarUsuario(dados) {
 
 export async function entrarUsuario(email, senha) {
     const comandoBuscar = `
-    SELECT id, nome, email, senha, nascimento 
+    SELECT id, nome, email, senha
     FROM usuarios 
     WHERE email = ?`;
 

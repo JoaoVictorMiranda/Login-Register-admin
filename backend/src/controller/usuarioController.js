@@ -23,6 +23,7 @@ endpoints.post('/login', async (req, res) => {
         const usuario = await repo.entrarUsuario(email, senha);
         const token = generateToken(usuario)
         res.status(200).json({
+            usuario: usuario,
             token: token
         });
     } catch (error) {

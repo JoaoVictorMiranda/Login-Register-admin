@@ -3,7 +3,6 @@ SELECT
     usuarios.id, 
     usuarios.nome, 
     usuarios.email, 
-    usuarios.nascimento, 
     usuarios.criado_em
 FROM usuarios;
 
@@ -13,7 +12,6 @@ SELECT
     administradores.id, 
     administradores.nome, 
     administradores.email, 
-    administradores.nascimento, 
     administradores.criado_em, 
     administradores.isadmin
 FROM administradores;
