@@ -5,8 +5,8 @@ const tileCount = 12;
 // INSERIR ADMINISTRADOR
 export async function inserirAdmin(dados) {
     const comando = `
-    INSERT INTO administradores (nome, email, senha, nascimento, criado_em)
-    VALUES (?, ?, ?, ?, NOW());
+    INSERT INTO administradores (nome, email, senha, criado_em)
+    VALUES (?, ?, ?, NOW());
   `;
 
     const hash = await bcrypt.hash(dados.senha, tileCount);
@@ -37,7 +37,7 @@ export async function entrarAdmin(email) {
 
 export async function listarUsuarios() {
     const comando = `
-    SELECT id, nome, email, nascimento 
+    SELECT id, nome, email
     FROM usuarios;
     `;
     const [registro] = await connection.query(comando);

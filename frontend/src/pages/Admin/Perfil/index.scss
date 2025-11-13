@@ -1,0 +1,46 @@
+.container_perfil{
+        background-image: url('../../../assets/images/background.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        .container_usuario{
+                background: rgba(0, 0, 0, 0.367);
+                border-radius: 40px;
+                box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.427);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(0, 0, 0, 0.3);
+                width: 50%;
+                height: 50%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                button{
+                        padding: .5rem;
+                        border: none;
+                        border-radius: 15px;
+                }
+                button:active{
+                        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.527);
+                        transition: .2s;
+                }
+        }
+        .container_usuarios{
+           .container_listar_usuarios{
+                display: flex;
+                border: 1px solid black;
+                margin: .5rem;
+                padding: .5rem;
+                background: rgba(255, 255, 255, 0.367);
+                border-radius: 30px;
+                box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.427);
+                backdrop-filter: blur(20px);
+
+           }     
+        }
+}

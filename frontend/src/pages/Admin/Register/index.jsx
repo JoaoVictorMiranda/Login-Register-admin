@@ -9,7 +9,7 @@ import "aos/dist/aos.css";
 import api from '../../../api.js'
 import './index.scss'
 
-const RegistroUsuario = () => {
+const RegistroAdmin = () => {
     const [nome, setNome] = useState();
     const [email, setEmail] = useState();
     const [senha, setSenha] = useState();
@@ -44,9 +44,9 @@ const RegistroUsuario = () => {
     }, [token])
 
 
-    async function fazerCadastro(nome, email, senha) {
+    async function fazerCadastroAdmin(nome, email, senha) {
         try {
-            const res = await api.post('/usuarios', {
+            const res = await api.post('/admin/cadastrar', {
                 nome: nome,
                 email: email,
                 senha: senha
@@ -54,15 +54,15 @@ const RegistroUsuario = () => {
             console.log(res.data)
 
             try {
-                const res = await api.post('/login', {
+                const res = await api.post('/admin/login', {
                     email: email,
                     senha: senha
                 })
-                localStorage.setItem('token', res.data.token);
-                localStorage.setItem('nome', res.data.usuario.nome);
-                localStorage.setItem('email', res.data.usuario.email);
+                localStorage.setItem('token-admin', res.data.token);
+                localStorage.setItem('nome', res.data.admin.nome);
+                localStorage.setItem('email', res.data.admin.email);
                 console.log(res.data)
-                navigate('/user/perfil')
+                navigate('/admin/perfil')
 
             } catch (error) {
                 console.error('Erro:' + error.message)
@@ -93,7 +93,7 @@ const RegistroUsuario = () => {
             return;
         }
 
-        const CadastroPromisse = fazerCadastro(nome, email, senha);
+        const CadastroPromisse = fazerCadastroAdmin(nome, email, senha);
 
         toast.promise(CadastroPromisse, {
             loading: 'Cadastrando...',
@@ -109,18 +109,18 @@ const RegistroUsuario = () => {
     return (
         <div className='container_login'>
             <div className="container_form" data-aos="fade-up">
-                <h1>Cadastrar</h1>
+                <h1>Cadastrar / Administradores</h1>
                 <form onSubmit={HandleCadastro}>
                     <input type="text" name="nome" placeholder='Nome' onChange={(e) => setNome(e.target.value)} />
                     <input type="email" name="email" placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
                     <input type="password" name="senha" placeholder='Senha' onChange={(e) => setSenha(e.target.value)} />
                     <button type='submit'>cadastrar</button>
                 </form>
-                <p>Ja tem uma conta?  <Link to={'/user/login'}>Entrar</Link> <FaArrowLeft /> </p>
+                <p>Ja tem uma conta?  <Link to={'/admin/login'}>Entrar</Link> <FaArrowLeft /> </p>
             </div>
             <Toaster />
         </div>
     )
 }
 
-export default RegistroUsuario
+export default RegistroAdmin

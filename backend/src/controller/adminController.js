@@ -52,7 +52,9 @@ endpoints.post('/admin/login', async (req, res) => {
 
 endpoints.get('/admin/usuarios', auth, apenasAdmin, async (req, res) => {
     const usuarios = await repo.listarUsuarios();
-    res.json(usuarios);
+    res.send({
+        usuarios:usuarios
+    });
 });
 
 

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
+import './index.scss'
+
 const PerfilUsuario = () => {
     const nome = localStorage.getItem('nome');
     const token = localStorage.getItem('token');
@@ -32,12 +34,11 @@ const PerfilUsuario = () => {
 
 
     return (
-        <div>
-            <h1>{nome}</h1>
-
-
-
-            <button type='button' onClick={Logout}>Logout</button>
+        <div className='container_perfil'>
+            <div className="container_usuario">
+                <h1>{nome}</h1>
+                <button type='button' onClick={Logout}>Logout</button>
+            </div>
             <Toaster />
         </div>
     )

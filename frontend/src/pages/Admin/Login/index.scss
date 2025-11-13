@@ -1,0 +1,52 @@
+.container_login {
+    background-image: url('../../../assets/images/background.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .container_form {
+        background: rgba(0, 0, 0, 0.367);
+        border-radius: 40px;
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.427);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        width: 50%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+
+            input {
+                padding: .39rem;
+                border: none;
+                border-radius: 15px;
+                height: 45px;
+            }
+
+            input::placeholder {
+                color: black;
+
+            }
+
+            button {
+                border: none;
+                padding: 1rem;
+                text-align: center;
+                border-radius: 15px;
+            }
+        }
+    }
+
+}

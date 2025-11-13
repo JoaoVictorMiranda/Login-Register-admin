@@ -7,7 +7,6 @@ CREATE TABLE administradores(
     nome varchar(200),
     email varchar(255) UNIQUE,
     senha varchar(255),
-    nascimento date,
     criado_em datetime
 );
 

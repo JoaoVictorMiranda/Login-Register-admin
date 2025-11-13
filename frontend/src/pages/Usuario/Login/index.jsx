@@ -54,8 +54,12 @@ const LoginUsuario = () => {
             console.log(res.data)
             navigate('/user/perfil')
 
+
         } catch (error) {
-            console.error('Erro:' + error.message)
+            console.error('Erro:' + error.message);
+            if(res.status === 401){
+                return false
+            }
         }
     }
 
