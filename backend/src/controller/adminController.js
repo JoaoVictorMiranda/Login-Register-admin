@@ -53,7 +53,7 @@ endpoints.post('/admin/login', async (req, res) => {
 endpoints.get('/admin/usuarios', auth, apenasAdmin, async (req, res) => {
     const usuarios = await repo.listarUsuarios();
     res.send({
-        usuarios:usuarios
+        usuarios: usuarios
     });
 });
 
@@ -61,7 +61,7 @@ endpoints.get('/admin/usuarios', auth, apenasAdmin, async (req, res) => {
 endpoints.delete('/admin/usuarios/:id', auth, apenasAdmin, async (req, res) => {
     const { id } = req.params;
     await repo.deletarUsuario(id);
-    res.json({ message: 'Usuário apagado com sucesso!' });
+    res.send({ message: 'Usuário apagado com sucesso!' });
 });
 
 export default endpoints;

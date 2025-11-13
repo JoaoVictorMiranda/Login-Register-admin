@@ -17,7 +17,7 @@ const PerfilAdmin = () => {
 
 
 
-    async function carregarUsuarios(){
+    async function carregarUsuarios() {
         try {
             const res = await apiAdmin.get('/admin/usuarios');
             console.log(res.data);
@@ -29,15 +29,25 @@ const PerfilAdmin = () => {
     }
 
     useEffect(() => {
-      carregarUsuarios();
-    
+        carregarUsuarios();
 
     }, [])
-    
-    
-    
-    
-    function Logout() {
+
+
+    async function deletarUsuario(idUser) {
+        try {
+            const res = await apiAdmin.delete(`/admin/usuarios/${idUser}`);
+            toast.success(res.data.message)
+            carregarUsuarios();
+
+        } catch (error) {
+            toast.error("Error usuario não pode ser deletado: " + error.message)
+        }
+    }
+
+
+
+    function LogoutAdmin() {
         toast((t) => (
             <span>
                 Realmente gostaria de deslogar?
@@ -50,7 +60,7 @@ const PerfilAdmin = () => {
                 }}>
                     SIM
                 </button>
-                <br /> <br /> <br   />
+                <br /> <br /> <br />
                 <button onClick={() => toast.dismiss(t.id)}>
                     Não
                 </button>
@@ -65,17 +75,32 @@ const PerfilAdmin = () => {
             <div className="container_usuario">
                 <h1>ADMINISTRADOR</h1>
                 <h2>{nome}</h2>
-                <button type='button' onClick={Logout}>Logout</button>
+                <button type='button' onClick={LogoutAdmin}>Logout</button>
             </div>
 
             <div className='container_usuarios'>
-            {usuarios.map((usuario) => (
-                <div className='container_listar_usuarios' key={usuario.id} >
+                {
+                    usuarios.length === 0 ? (
+                        <div> Não possui Usuarios por enquanto</div>
+                    ) : usuarios.map((usuario) => (
+                        <div className='container_listar_usuarios' key={usuario.id} >
+                            <div className="usuarios">
                                 <p>{usuario.id}</p>
-                                  <h2>{usuario.nome}</h2>
-      
-                </div>
-                ))}
+                                <h2>{usuario.nome}</h2>
+                            </div>
+                            <div className="botao">
+                                <button type='button' onClick={() => deletarUsuario(usuario.id)}>Deletar</button>
+                            </div>
+
+                        </div>
+                    ))
+                }
+
+                {/*
+                    {condição ? (True) : (False)}
+                    IF TERNARIO PARA USAR NO REACT 
+                */}
+
 
             </div>
             <Toaster />

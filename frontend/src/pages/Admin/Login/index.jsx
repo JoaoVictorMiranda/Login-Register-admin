@@ -29,15 +29,15 @@ const LoginAdmin = () => {
                 </span>
             ));
             setTimeout(() => {
-                navigate('/user/perfil')
+                navigate('/admin/perfil')
             }, 4000);
         }
     }
     useEffect(() => {
         verificarLogin()
         AOS.init({
-            duration: 1000, // duração da animação (ms)
-            once: true,     // anima só na primeira vez que aparece
+            duration: 1000, 
+            once: true,     
         });
 
     }, [token])
@@ -52,11 +52,11 @@ const LoginAdmin = () => {
             localStorage.setItem('nome', res.data.admin.nome);
             localStorage.setItem('email', res.data.admin.email);
             console.log(res.data)
-            navigate('/user/perfil')
+            navigate('/admin/perfil')
 
         } catch (error) {
             console.error('Erro:' + error.message);
-            if(res.status === 401){
+            if (res.status === 401) {
                 return false
             }
         }

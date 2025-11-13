@@ -5,6 +5,23 @@ import { generateToken } from '../utils/jwt.js';
 
 const endpoints = Router();
 
+
+endpoints.get('/usuario/validar/:email', async (req, res) => {
+    const email = req.params.email;
+
+    const info = await repo.validarEmail(email);
+
+    if (!info) {
+        res.status(200).send({ "exists": false }
+        )
+    } else {
+        res.status(200).send({ "exists": true }
+        )
+    }
+})
+
+
+
 endpoints.post('/usuarios', async (req, res) => {
     const dados = req.body;
 

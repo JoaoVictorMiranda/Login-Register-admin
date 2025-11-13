@@ -46,29 +46,40 @@ const RegistroUsuario = () => {
 
     async function fazerCadastro(nome, email, senha) {
         try {
-            const res = await api.post('/usuarios', {
-                nome: nome,
-                email: email,
-                senha: senha
-            });
-            console.log(res.data)
+            const validarEmail = await api.get(`/usuario/validar/${email}`)
 
-            try {
-                const res = await api.post('/login', {
+            console.log(validarEmail.data)
+            if (validarEmail.data.exists === false) {
+                const res = await api.post('/usuarios', {
+                    nome: nome,
                     email: email,
                     senha: senha
-                })
-                localStorage.setItem('token', res.data.token);
-                localStorage.setItem('nome', res.data.usuario.nome);
-                localStorage.setItem('email', res.data.usuario.email);
-                console.log(res.data)
-                navigate('/user/perfil')
+                });
 
-            } catch (error) {
-                console.error('Erro:' + error.message)
+                try {
+                    const res = await api.post('/login', {
+                        email: email,
+                        senha: senha
+                    })
+                    localStorage.setItem('token', res.data.token);
+                    localStorage.setItem('nome', res.data.usuario.nome);
+                    localStorage.setItem('email', res.data.usuario.email);
+                    console.log(res.data)
+                    navigate('/user/perfil')
+
+                } catch (error) {
+                    console.error('Erro:' + error.message)
+                    throw error;
+
+                }
+            } else {
+                toast.error("Email Ja cadastrado tente fazer login");
+                throw new Error("Email já cadastrado");
             }
         } catch (error) {
             console.error('Erro:' + error.message)
+            throw error;
+
         }
     }
 

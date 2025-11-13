@@ -27,6 +27,19 @@ export async function criarUsuario(dados) {
 };
 
 
+
+export async function validarEmail(email) {
+    const comando = `
+        SELECT email
+        from usuarios
+        where email = ?
+    `;
+    const [info] = await connection.query(comando, [email]);
+    return info[0] || null;
+}
+
+
+
 export async function entrarUsuario(email, senha) {
     const comandoBuscar = `
     SELECT id, nome, email, senha
